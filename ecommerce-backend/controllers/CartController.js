@@ -26,8 +26,6 @@ exports.getUserCart = catchAsyncError(async (req, res) => {
         };
       })
     );
-
-    console.log("This is cart data", cartData);
     return cartApiResponse(
       res,
       200,
@@ -89,11 +87,8 @@ exports.removeProduct = catchAsyncError(async (req, res) => {
   try {
     const productId = req.params.id;
     const userId = req.user.id;
-    console.log("User id", userId);
-    console.log("Product id", productId);
     // Find the user's cart
     const cart = await cartModal.findOne({ user: userId });
-   console.log("cart", cart);
     // If cart not found, return immediately after sending the response
     if (!cart) {
       return cartApiResponse(res, 400, false, "Cart not found");

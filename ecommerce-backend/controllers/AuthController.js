@@ -10,7 +10,6 @@ const cloudinary = require('cloudinary')
 // Registering new user
 exports.userRegister = catchAsyncError(async (req, res, next) => {
   const { name, username, email, password } = req.body;
-   console.log("We have get this for registration", req.body);
 
    
   try {

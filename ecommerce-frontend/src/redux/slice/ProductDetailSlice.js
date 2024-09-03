@@ -4,7 +4,6 @@ import axios from "axios";
 export const fetchProductDetails = createAsyncThunk(
   "productSlice/fetchProductDetails",
   async (productId, { rejectWithValue }) => {
-    console.log("this is product id", productId);
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_PRODUCT_API_URL}/${productId}`,
@@ -14,10 +13,8 @@ export const fetchProductDetails = createAsyncThunk(
           },
         }
       );
-      console.log("this is details of product", result.data);
       return result.data;
     } catch (error) {
-      console.log("Inside error block");
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data.message);
       } else {

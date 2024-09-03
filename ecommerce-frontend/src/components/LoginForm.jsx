@@ -50,7 +50,6 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(setErrorMessage("")); // Reset error state
-    console.log("This is form data login", formData);
     // Check form validation
     const validationResult = LoginValidation.safeParse(formData);
     setError({

@@ -178,6 +178,10 @@ function AddProduct() {
   }))
   }
 
+  const handleColorInputVisible = () => {
+    setIsColorInputVisible(!isColorInputVisible)
+  }
+
   return (
     <>
       <form action="" encType="multipart/form-data" onSubmit={handleAddProduct}>
@@ -336,12 +340,12 @@ function AddProduct() {
 
                   {/* Colors */}
                   <div className="text-md font-button-s text-darkslategray font-semibold mt-5">
-                  <button
-                    className="flex items-center"
-                    onClick={() => setIsColorInputVisible(!isColorInputVisible)}
+                  <div
+                    className="flex items-center cursor-pointer "
+                    onClick={handleColorInputVisible}
                   >
                     Add colors <FaPlusCircle size={20} className="ml-1" />
-                  </button>
+                  </div>
                   {isColorInputVisible && (
                     <div className="flex items-center mt-2">
                       <input

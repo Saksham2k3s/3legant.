@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { FaPlusCircle, FaChevronDown } from "react-icons/fa";
+import { FaPlusCircle, FaChevronDown, } from "react-icons/fa";
 import { AiOutlineEdit } from "react-icons/ai";
 import { LuImagePlus } from "react-icons/lu";
 import toast from "react-hot-toast";
 import { fetchProductDetails } from "../../redux/slice/ProductDetailSlice";
 import { RxCrossCircled } from "react-icons/rx";
 import axios from "axios";
-
 
 function EditProduct() {
   const id = useParams();
@@ -81,7 +80,6 @@ function EditProduct() {
         ...productData,
         colors: [...productData.colors, selectedColor],
       });
-      console.log("these are colors", productData.colors);
     }
     setIsColorInputVisible(false); // Hide the color input after adding the color
   };
@@ -135,18 +133,16 @@ function EditProduct() {
         `${process.env.REACT_APP_PRODUCT_API_URL}/update/${productDetail?._id}`,
         productData
       );
-    
-      // Handle the response
-      console.log('Product updated successfully:', res.data);
+      if (res.status === 200) {
+        toast.success("Product updated Successfully!");
+      }
+  
     } catch (error) {
       // Handle the error
       console.error('Error updating product:', error.response ? error.response.data : error.message);
     }
 
-    if (successMessage) {
-      toast.success(successMessage);
-      console.log("we have added this product", product);
-    }
+    
   };
 
   //Image upload
@@ -159,7 +155,6 @@ function EditProduct() {
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-          console.log(reader.result);
           setImagesPreview((old) => [...old, reader.result]);
           setImages((old) => [...old, reader.result]);
           setProductData((prev) => ({
@@ -199,14 +194,18 @@ function EditProduct() {
   }))
   }
 
+  const handleColorInputVisible = () => {
+    setIsColorInputVisible(!isColorInputVisible)
+  }
+
   
 
   return (
     <>
       <form action="" encType="multipart/form-data" onSubmit={updateProductHanlder}>
-        <div className="px-10 min-h-screen bg-dashboard-bg py-5">
+        <div className="px-10 min-h-screen bg-dashboard-bg">
           <div className="text-black font-headline-4 text-4xl ">
-            Edit Product
+            Add Product
           </div>
           <div className="w-full flex justify-start mt-4">
             <input
@@ -227,7 +226,7 @@ function EditProduct() {
   {imagesPreview.map((image, index) => (
     <div
       key={index}
-      className="relative w-[25%] h-[100px] lg:w-[40%] lg:h-[270px]"
+      className="relative w-[25%] h-[270px] lg:w-[30%] lg:h-[270px]"
     >
       <div className="cursor-pointer absolute -top-1 -right-1 bg-red-600 rounded-full ">
         <RxCrossCircled size={20} color="white" onClick={() => removeImageHandler(index) } />
@@ -352,7 +351,7 @@ function EditProduct() {
                 <div className="text-md font-button-s text-darkslategray font-semibold mt-5">
                   <button
                     className="flex items-center"
-                    onClick={() => setIsColorInputVisible(!isColorInputVisible)}
+                    onClick={handleColorInputVisible}
                   >
                     Add colors <FaPlusCircle size={20} className="ml-1" />
                   </button>
@@ -454,7 +453,7 @@ function EditProduct() {
               </div>
 
               <button
-                className="cursor-pointer border-none py-5 px-[74px] bg-neutral-07-100 text-white shadow-[0px_8px_16px_rgba(0,_0,_0,_0.04)] rounded-full flex flex-row items-center justify-center w-[80%] lg:w-[50%] font-button-s "
+                className="cursor-pointer border-none py-5 px-[74px] bg-neutral-07-100 text-white shadow-[0px_8px_16px_rgba(0,_0,_0,_0.04)] rounded-full flex flex-row items-center justify-center w-[50%] font-button-s "
                 type="submit"
               >
                 Update Product

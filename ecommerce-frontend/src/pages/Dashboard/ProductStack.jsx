@@ -25,7 +25,8 @@ function ProductStack() {
     navigate(`/admin/edit/${productId}`)
   };
 
-  const handleDelete = (productId) => {
+  const handleDelete = (productId, event) => {
+    event.stopPropagation();
      dispatch(deleteProduct(productId));
      dispatch(removeProduct(productId))
      if(succssMessage === "Product deleted Successfully!"){
@@ -40,21 +41,6 @@ function ProductStack() {
   return (
     <>
       <div className="px-10 min-h-screen bg-dashboard-bg ">
-        {/* <div className="w-full flex-col lg:flex-row gap-5 lg:gap-0 justify-between py-5">
-          <div className="text-black font-headline-4 text-2xl lg:text-4xl mb-5 lg:mb-0 w-full lg:w-1/2 ">
-            Product Stack
-          </div>
-          <div className="w-full lg:w-1/2 flex flex-row justify-between" >
-          <Search />
-          <Link
-            to={"/dashboard/new"}
-            className="border border-black bg-black text-white w-[80%] md:w-[50%] lg:w-[20%] text-center rounded-full flex flex-row gap-2 justify-center items-center px-2 py-1 font-headline-4 text-xl mt-5 lg:mt-0 "
-          >
-            Add new product
-          </Link>
-          </div>
-        </div> */}
-
 <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-start lg:items-center py-5">
       {/* Title Section */}
       <div className="text-black font-headline-4 text-2xl lg:text-4xl mb-5 lg:mb-0 w-full lg:w-1/2">
@@ -135,7 +121,7 @@ function ProductStack() {
                           </div>
                           <div
                             className="text-red-500 border border-table-border-color rounded-e-md flex p-2 cursor-pointer "
-                            onClick={() => handleDelete(product._id)}
+                            onClick={(event) => handleDelete(product._id, event)}
                           >
                             <RiDeleteBinLine size={20} />
                           </div>

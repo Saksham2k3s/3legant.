@@ -37,7 +37,6 @@ function RegistrationForm() {
     }
 
     if (errorMessage !== "") {
-      console.log("This is error message", errorMessage);
       toast.error(errorMessage);
     }
   }, [user, token, errorMessage, navigate]);

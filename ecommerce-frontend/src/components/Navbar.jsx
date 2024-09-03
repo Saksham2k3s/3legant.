@@ -58,7 +58,6 @@ function Navbar() {
         `${REACT_APP_USER_API_URL}/logout`
       );
       if (response.data.success) {
-        console.log("logout");
         toast.success("Logged Out!");
         dispatch(setLogout());
         dispatch(setUser(null));

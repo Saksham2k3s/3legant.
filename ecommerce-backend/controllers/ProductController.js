@@ -7,7 +7,6 @@ const CartModel = require('../models/cartModal')
 //create Product
 exports.createProduct = catchAsyncError(async (req, res, next) => {
   let images = [];
-  console.log("images from frontend", req.body.images);
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
   } else {
@@ -86,8 +85,6 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
       return productApiResponse(res, 500, false, "Product not found");
     }
 
-    console.log("Product found", product);
-
     return productApiResponse(
       res,
       200,
@@ -105,13 +102,14 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
   }
 });
 
+
 // Update Product
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
   const productId = req.params.id;
   let product = await ProductModel.findById(productId);
-  console.log("Req images", req.body.images);
+
   if (!product) {
-    return productApiResponse(res, 500, false, "Product not found");
+    return productApiResponse(res, 404, false, "Product not found");
   }
 
   let images = [];
@@ -122,28 +120,36 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
       images.push(req.body.images);
     } else if (Array.isArray(req.body.images)) {
       images = req.body.images;
+    } else {
+      return productApiResponse(res, 400, false, "Invalid images format");
     }
   } else {
-    // If no images are provided, skip updating the images
     return productApiResponse(res, 400, false, "No images provided");
   }
-  
+
   const imagesLinks = [];
-  
+
   // Uploading images to Cloudinary
   try {
     for (let i = 0; i < images.length; i++) {
-      let result
-      if(!images[i].url){
-         result = await cloudinary.v2.uploader.upload(images[i], {
+      let result;
+
+      // Check if the image is a URL
+      if (typeof images[i] === 'string' && images[i].startsWith('http')) {
+        imagesLinks.push({ url: images[i], public_id: '' }); // If the image is a URL, public_id can be empty
+      } else if (typeof images[i] === 'object' && images[i].url) {
+        imagesLinks.push({ url: images[i].url, public_id: images[i].public_id || '' }); // Handle case with an object
+      } else {
+        // Assume it is a file path or base64 string
+        result = await cloudinary.v2.uploader.upload(images[i], {
           folder: "products-image",
         });
-      }
 
-      imagesLinks.push({
-        public_id: result.public_id,
-        url: result.secure_url,
-      });
+        imagesLinks.push({
+          public_id: result.public_id,
+          url: result.secure_url,
+        });
+      }
     }
   } catch (error) {
     return productApiResponse(res, 500, false, "Error uploading images to Cloudinary", error.message);
@@ -152,20 +158,30 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
   req.body.images = imagesLinks;
 
   // Update product details in the database
-  product = await ProductModel.findByIdAndUpdate(productId, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  try {
+    product = await ProductModel.findByIdAndUpdate(productId, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
-  return productApiResponse(res, 200, true, "Product Updated Successfully", product);
+    if (!product) {
+      return productApiResponse(res, 404, false, "Product update failed");
+    }
+
+    return productApiResponse(res, 200, true, "Product Updated Successfully", product);
+  } catch (error) {
+    return productApiResponse(res, 500, false, "Error in updating product", error.message);
+  }
 });
+
+
+
 
 
 
 
 // Delete Product
 exports.deleteProduct = catchAsyncError(async (req, res, next) => {
-  console.log("Deleting product");
 
   try {
     const product = await ProductModel.findById(req.params.id);

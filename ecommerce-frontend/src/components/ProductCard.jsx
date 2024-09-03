@@ -15,7 +15,6 @@ function ProductCard({ product }) {
     if (successMessage) {
       toast.success(successMessage);
       dispatch(setSuccessMessage());
-      console.log(product.category);
     }
   }, [successMessage, dispatch, product.category]);
 

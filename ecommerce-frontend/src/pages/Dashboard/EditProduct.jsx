@@ -12,9 +12,6 @@ import axios from "axios";
 function EditProduct() {
   const id = useParams();
   const { user } = useSelector((state) => state.userAuth);
-  const { successMessage, product } = useSelector(
-    (state) => state.adminProduct
-  );
   const { productDetail } = useSelector((state) => state.productDetail);
   const {
     name,
@@ -349,12 +346,12 @@ function EditProduct() {
 
                 {/* Colors */}
                 <div className="text-md font-button-s text-darkslategray font-semibold mt-5">
-                  <button
-                    className="flex items-center"
+                  <div
+                    className="flex items-center cursor-pointer "
                     onClick={handleColorInputVisible}
                   >
                     Add colors <FaPlusCircle size={20} className="ml-1" />
-                  </button>
+                  </div>
                   {isColorInputVisible && (
                     <div className="flex items-center mt-2">
                       <input

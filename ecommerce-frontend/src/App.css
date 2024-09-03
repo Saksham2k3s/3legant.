@@ -1,0 +1,42 @@
+/* scroll bar styling */
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(174, 174, 174, 0.564);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 50px;
+  height: 10px;
+  width: 10px;
+}
+
+/* Styling for the active dot */
+.slick-dots li.slick-active div {
+  background-color: black; /* Active dot color */
+}
+
+/* Styling for the inactive dots */
+.slick-dots li div {
+  background-color: #cccccc; /* Inactive dot color */
+  width: 8px; /* Width of the dot */
+  height: 8px; /* Height of the dot */
+}
+
+label {
+  @apply text-black font-headline-4 font-semibold;
+}
+
+.text-input {
+  @apply bg-transparent text-black w-full lg:w-fit text-[20px] focus:outline-none placeholder:text-gray-400 placeholder:font-medium mt-2 lg:mt-3 px-5 py-2;
+}
+

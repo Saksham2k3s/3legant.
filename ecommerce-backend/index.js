@@ -10,7 +10,6 @@ const cloudinary = require('cloudinary');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cartRoute = require('./routes/cartRoute');
-
 const app = express();
 
 // Config

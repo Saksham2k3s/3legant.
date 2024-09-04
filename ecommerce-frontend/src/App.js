@@ -26,7 +26,7 @@ function App() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
-
+ console.log("This is token in frontend", token);
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const fetchUserDetails = async () => {
     try {

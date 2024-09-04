@@ -55,11 +55,11 @@ function Cart() {
                <Link to={'/shop'} className="text-md font-button-s underline " >Shop now</Link>
                </div>
             </div>
-          ) : ( <div>
+          ) : ( <div className="" >
             {cart && cart.map((item) => {
               return (
               item && item.product && (
-                  <div className="w-full h-[150px] flex flex-row gap-4 border-b-gray-300 border-b-2 ">
+                  <div className="w-full h-[150px] flex flex-row gap-4 border-b-gray-300 border-b-2  ">
                     <div className="w-[30%] py-3 ">
                       <img
                         src={item?.product?.images[0]?.url}

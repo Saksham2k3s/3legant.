@@ -174,26 +174,26 @@ function ProductDetail() {
             </div>
             <div className="flex gap-5">
               <div className="bg-[#f3f5f7] rounded-md flex flex-row items-center px-2 py-1 w-fit">
-                <button className="w-8 h-8 flex items-center justify-center">
+                <div className="w-8 h-8 flex items-center justify-center">
                   <FaPlus size={10} />
-                </button>
+                </div>
                 <div className="w-8 h-8 flex items-center justify-center text-lg">
                   {"1"}
                 </div>
-                <button className="w-8 h-8 flex items-center justify-center">
+                <div className="w-8 h-8 flex items-center justify-center">
                   <FaMinus size={10} />
-                </button>
+                </div>
               </div>
-              <button className="border border-black text-center rounded-md flex flex-row gap-2 justify-center items-center px-2 py-1 w-full font-headline-4 text-xl">
+              <div className="border border-black text-center rounded-md flex flex-row gap-2 justify-center items-center px-2 py-1 w-full font-headline-4 text-xl">
                 <GoHeart /> Wishlist
-              </button>
+              </div>
             </div>
-            <button
+            <div
               className="cursor-pointer border-none py-[9px] px-[74px] bg-neutral-07-100 text-white shadow-[0px_8px_16px_rgba(0,_0,_0,_0.04)] rounded-lg flex flex-row items-center justify-center"
               onClick={handleProductAddingIntoCart}
             >
               Add to Cart
-            </button>
+            </div>
             <div>
               {additionalInfos.map(
                 (info, index) =>

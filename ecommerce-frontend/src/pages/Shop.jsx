@@ -50,7 +50,8 @@ function Shop() {
                   onChange={categoryFilterHandler}
                 >
                   <option value="Living Room">Living Room</option>
-                  <option value="Footwear">Kitchen</option>
+                  <option value="Kitchen">Kitchen</option>
+                  <option value="Garden and Outdoor">Garden and Outdoor</option>
                 </select>
               </div>
             </div>

@@ -18,6 +18,9 @@ export const loginUser = createAsyncThunk(
           },
         }
       );
+      if(result.status === 200){
+        localStorage.setItem('token', result.data.token);
+      }
       return result.data;
     } catch (error) {
       if (error.response && error.response.data) {

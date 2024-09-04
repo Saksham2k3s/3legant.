@@ -24,7 +24,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true
+
+  const token = localStorage.getItem('token');
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const fetchUserDetails = async () => {
     try {
       setLoading(true);

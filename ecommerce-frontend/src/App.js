@@ -24,16 +24,14 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true
   const fetchUserDetails = async () => {
     try {
       setLoading(true);
       const token = Cookies.get('token');
-      console.log('token', token);
       const result = await axios.get(
         `${process.env.REACT_APP_USER_API_URL}/profile`
       );
-      console.log("This is result",result.status);
       if (result.status === 200) {
         dispatch(setUser(result.data.data)); 
         setLoading(false);

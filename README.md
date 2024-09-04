@@ -42,50 +42,64 @@ This project is a full-fledged e-commerce platform built with a React frontend a
 
 ### Setup Instructions
 
-1. **Clone the repository:**
+1. **Fork repository:**
+
+   - Click on the Fork button at the top right of the repository page.
+   - This will create a copy of the repository under your GitHub profile.
+
+2. **Clone the repository:**
 
     ```bash
     git clone https://github.com/your-username/your-repo-name.git
     ```
 
-2. **Install dependencies:**
+3. **Install dependencies:**
 
     Navigate to the frontend and backend directories and install the required packages.
 
     ```bash
-    cd frontend
+    cd ecommerce-frontend
     npm install
     ```
 
     ```bash
-    cd backend
+    cd ecommerce-backend
     npm install
     ```
 
-3. **Environment Variables:**
+4. **Environment Variables:**
 
     Create a `.env` file in the `backend` directory with the following content:
 
     ```plaintext
-    PORT=5000
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
-    COOKIE_EXPIRES_TIME=7d
+NODE_ENV = development
+PORT = 3001
+MONGO_URI = your_mongodb_uri
+JWT_SECERET = your_jwt_seceret
+JWT_EXPIRES_IN = 1d
+COOKIE_EXPIRES = 7
+CLIENT_URL = your_client_uri
+CLOUDINARY_URL=your_cloudinary_uri
+CLOUDINARY_API_SECRET_KEY = your_cloudinary_seceret_key
+CLOUDINARY_API_KEY = your_api_key
+CLOUDINARY_CLOUD_NAME = cloudinary_cloud_name
     ```
 
     Create a `.env` file in the `frontend` directory with the following content:
 
     ```plaintext
-    REACT_APP_CART_API_URL=http://localhost:5000/api/v1/cart
+    REACT_APP_USER_API_URL=http://localhost:5000/api/v1/user
+   REACT_APP_PRODUCT_API_URL= http://localhost:5000/api/v1/product
+   REACT_APP_CART_API_URL=http://localhost:5000/api/v1/cart
     ```
 
-4. **Run the Application:**
+5. **Run the Application:**
 
     Start the backend server:
 
     ```bash
     cd backend
-    npm start
+    nodemon
     ```
 
     Start the frontend development server:
@@ -95,7 +109,7 @@ This project is a full-fledged e-commerce platform built with a React frontend a
     npm start
     ```
 
-5. **Access the Application:**
+6. **Access the Application:**
 
     Open your browser and navigate to `http://localhost:3000` to use the application.
 

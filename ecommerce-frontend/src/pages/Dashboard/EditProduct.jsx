@@ -199,8 +199,8 @@ function EditProduct() {
 
   return (
     <>
-      <form action="" encType="multipart/form-data" onSubmit={updateProductHanlder}>
-        <div className="px-10 min-h-screen bg-dashboard-bg">
+      <form action=""  encType="multipart/form-data" onSubmit={updateProductHanlder}>
+        <div className="px-10 min-h-screen bg-dashboard-bg py-5 ">
           <div className="text-black font-headline-4 text-4xl ">
             Add Product
           </div>

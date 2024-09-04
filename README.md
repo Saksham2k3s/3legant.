@@ -72,6 +72,7 @@ This project is a full-fledged e-commerce platform built with a React frontend a
     Create a `.env` file in the `backend` directory with the following content:
 
     ```plaintext
+    
 NODE_ENV = development
 PORT = 3001
 MONGO_URI = your_mongodb_uri
@@ -88,7 +89,8 @@ CLOUDINARY_CLOUD_NAME = cloudinary_cloud_name
     Create a `.env` file in the `frontend` directory with the following content:
 
     ```plaintext
-    REACT_APP_USER_API_URL=http://localhost:5000/api/v1/user
+    
+   REACT_APP_USER_API_URL=http://localhost:5000/api/v1/user
    REACT_APP_PRODUCT_API_URL= http://localhost:5000/api/v1/product
    REACT_APP_CART_API_URL=http://localhost:5000/api/v1/cart
     ```

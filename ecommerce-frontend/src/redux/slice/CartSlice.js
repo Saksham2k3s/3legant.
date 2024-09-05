@@ -21,7 +21,7 @@ export const getUserCart = createAsyncThunk(
   "getUserCart",
   async (id, { rejectWithValue }) => {
     try {
-      const result = await axios.get(`${process.env.REACT_APP_CART_API_URL}`);
+      const result = await axios.get(`${process.env.REACT_APP_CART_API_URL}`, { withCredentials: true });
       const userCart = result.data;
       const filterCart = userCart?.cart?.filter(cart => cart !== null);
       return filterCart;

@@ -47,7 +47,7 @@ function Cart() {
         </div>
         {
           cart.length === 0 ? (
-            <div className=" h-full  flex flex-col justify-center align-middle items-center" >
+            <div className=" h-full  flex flex-col justify-center align-middle items-center "  >
               <img src="https://cdn-icons-png.flaticon.com/128/17389/17389099.png" alt="empty-cart" className="h-[30%] w-[30%]" />
                <h3 className="text-xl lg:text-3xl text-black font-headline-4" >Your Cart Is Empty Now</h3>
                <br/>

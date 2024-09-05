@@ -7,19 +7,21 @@ import { FaRegEdit } from "react-icons/fa";
 import Pagination from "../../components/Pagination";
 import toast from "react-hot-toast";
 import { deleteProduct } from "../../redux/slice/Dashboard/DeleteProduct";
-import { fetchProducts, removeProduct } from "../../redux/slice/ProductSlice";
+import { fetchProducts, removeProduct, setPage } from "../../redux/slice/ProductSlice";
 
 function ProductStack() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userAuth);
-  const { products } = useSelector((state) => state.products);
+  const { products, page } = useSelector((state) => state.products);
   const { succssMessage } = useSelector(state => state.deleteProduct)
   useEffect(() => {
     if (user.role === "user") {
       navigate("/");
     }
-  }, [navigate, user.role]);
+
+    dispatch(setPage(1))
+  }, [dispatch, navigate, user.role]);
 
   const handleUpdate = (productId) => {
     navigate(`/admin/edit/${productId}`)

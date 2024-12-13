@@ -70,6 +70,7 @@ const productSlice = createSlice({
       const filterProducts = state.products.filter((item) => item._id !== productId);
       state.products = filterProducts;
   }
+  
    },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {

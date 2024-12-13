@@ -56,8 +56,8 @@ function ProductCard({ product }) {
         <div className="self-stretch flex flex-col items-start justify-start">
           <div className="self-stretch flex flex-col items-start justify-start gap-1">
             <div className="flex gap-1 text-darkslategray ">
-              {stars.map((num) => (
-                <FaStar size={15} />
+              {stars.map((num, idx) => (
+                <FaStar key={idx} size={15} />
               ))}
             </div>
             <div className="self-stretch relative leading-6 font-semibold">

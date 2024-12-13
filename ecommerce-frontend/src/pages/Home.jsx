@@ -122,8 +122,8 @@ function Home() {
       {/* Value Cards */}
       <div className="px-5 md:px-40 mt-20 ">
         <div className="flex flex-col lg:flex-row gap-5">
-          {valueCardData.map((cardValue) => {
-            return <ValueCard cardValue={cardValue} />;
+          {valueCardData.map((cardValue, idx) => {
+            return <ValueCard key={idx} cardValue={cardValue} />;
           })}
         </div>
       </div>

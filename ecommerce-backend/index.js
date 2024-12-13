@@ -1,17 +1,18 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const databaseConnection = require('./config/dbConnet');
-const userRoute = require('./routes/userRoute');
+const bodyParser = require('body-parser');
+const cartRoute = require('./routes/cartRoute');
+const cloudinary = require('cloudinary');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const productRoute = require('./routes/productRoute');
-const orderRoute = require('./routes/orderRoute');
-const cloudinary = require('cloudinary');
-const bodyParser = require('body-parser');
+const databaseConnection = require('./config/dbConnet');
+const dotenv = require('dotenv');
+const express = require('express');
 const fileUpload = require('express-fileupload');
-const cartRoute = require('./routes/cartRoute');
-const app = express();
+const orderRoute = require('./routes/orderRoute');
+const productRoute = require('./routes/productRoute');
+const userRoute = require('./routes/userRoute');
 
+// Initailize app 
+const app = express();
 // Config
 dotenv.config({ path: './.env' });
 
@@ -21,8 +22,6 @@ app.use(cors({
     methods: 'GET,POST,PUT,DELETE', 
     credentials: true, 
   }));
-
-
 
 // Connect to Database
 databaseConnection();

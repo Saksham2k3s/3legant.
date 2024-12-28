@@ -43,7 +43,7 @@ function Cart() {
   return (
     <>
       <div className=" p-4 ">
-        <div className="flex w-full  ">
+        <div className="flex w-full ">
           <div className="w-1/2 text-black text-start">
             <h1 className=" font-headline-4 ">Cart</h1>
           </div>
@@ -66,14 +66,14 @@ function Cart() {
             </div>
           </div>
         ) : (
-          <div className="">
+          <div className=" max-h-[80vh] lg:max-h-[78vh] overflow-scroll overflow-x-hidden mt-10 ">
             {cart &&
               cart.map((item) => {
                 return (
                   item &&
                   item.product && (
                     <div
-                      className="w-full h-[150px] flex flex-row gap-4 border-b-gray-300 border-b-2  "
+                      className="w-full min-h-[150px] flex flex-row gap-4 border-b-gray-300 border-b-2  "
                       key={item._id}
                     >
                       <div className="w-[30%] py-3 ">
@@ -130,11 +130,12 @@ function Cart() {
           </div>
         )}
 
-        <div className="bg-black py-2 w-full text-white text-center rounded-xl absolute bottom-12 font-button-s ">
+        
+        <div className="bg-black py-2 w-full text-white text-center rounded-xl font-button-s ">
           Total: ${total}
         </div>
         <button
-          className="w-full border-2 border-black rounded-xl font-button-s text-black bg-white outline-none absolute bottom-2 py-2 font-semibold"
+          className="w-full border-2 border-black rounded-xl font-button-s text-black bg-white outline-none py-2 font-semibold"
           onClick={() => {
             toast.success("Order Places Successfully");
           }}

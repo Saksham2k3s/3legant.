@@ -206,7 +206,7 @@ function Navbar() {
 
       {/* Cart Toggler */}
       <div
-        className={`fixed top-0 right-0 z-30 w-[80%] md:w-[50%] lg:w-[30%] h-full bg-white flex flex-col transition-transform transform ${
+        className={`fixed top-0 right-0 z-30 w-[90%] md:w-[50%] lg:w-[30%] h-full bg-white flex flex-col transition-transform transform ${
           cartOpen ? "translate-y-0" : "translate-y-full"
         }`}
       >

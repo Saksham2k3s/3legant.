@@ -14,10 +14,13 @@ function Cart() {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
   const [total, setTotal] = useState(0);
+
+  // Remove Product
   const handleRemoveProduct = (productId) => {
     dispatch(removeProduct(productId));
     dispatch(removeFromCart(productId));
   };
+  
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -48,9 +51,9 @@ function Cart() {
         {cart.length === 0 ? (
           <div className=" h-full  flex flex-col justify-center align-middle items-center ">
             <img
-              src="https://cdn-icons-png.flaticon.com/128/17389/17389099.png"
               alt="empty-cart"
               className="h-[30%] w-[30%]"
+              src="https://cdn-icons-png.flaticon.com/128/17389/17389099.png"
             />
             <h3 className="text-xl lg:text-3xl text-black font-headline-4">
               Your Cart Is Empty Now
@@ -75,9 +78,9 @@ function Cart() {
                     >
                       <div className="w-[30%] py-3 ">
                         <img
-                          src={item?.product?.images[0]?.url}
                           alt="table-img"
                           className="w-full h-full"
+                          src={item?.product?.images[0]?.url}
                         />
                       </div>
                       <div className="flex flex-row justify-between w-[70%] py-3">

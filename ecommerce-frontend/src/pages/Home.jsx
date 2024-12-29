@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import ImageCarousel from "../components/ImageCarousel";
-import { FaArrowRightLong, FaEnvelope } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-import ProductsList from "../components/ProductsList";
-import { valueCardData } from "../utils/constants";
-import ValueCard from "../components/ValueCard";
-import SaleBanner from "../assets/banner-image.png";
-import { useDispatch } from "react-redux";
-import { fetchProducts } from "../redux/slice/ProductSlice";
 import { carouselImages } from "../utils/constants";
+import { FaArrowRightLong, FaEnvelope } from "react-icons/fa6";
+import { fetchProducts } from "../redux/slice/ProductSlice";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { valueCardData } from "../utils/constants";
+import ImageCarousel from "../components/ImageCarousel";
+import ProductsList from "../components/ProductsList";
+import React, { useEffect } from "react";
+import SaleBanner from "../assets/banner-image.png";
+import ValueCard from "../components/ValueCard";
 
 function Home() {
   const dispatch = useDispatch();

@@ -10,6 +10,7 @@ const fileUpload = require('express-fileupload');
 const orderRoute = require('./routes/orderRoute');
 const productRoute = require('./routes/productRoute');
 const userRoute = require('./routes/userRoute');
+const wishlistRoute = require('./routes/wishlistRoute');
 
 // Initailize app 
 const app = express();
@@ -44,6 +45,7 @@ app.use('/api/v1/user', userRoute);
 app.use('/api/v1/product', productRoute);
 app.use('/api/v1/order', orderRoute);
 app.use('/api/v1/cart', cartRoute);
+app.use('/api/v1/wishlist', wishlistRoute);
 
 // Start the server
 const PORT = process.env.PORT || 8000;

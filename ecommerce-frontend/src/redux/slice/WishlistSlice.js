@@ -54,7 +54,7 @@ const wishlistSlice = createSlice({
   reducers: {
     toggleWishlist(state, action) {
       const product = action.payload;
-      const index = state.myProducts.findIndex(
+      const index = state.myProducts?.findIndex(
         (item) => item._id === product._id
       );
 

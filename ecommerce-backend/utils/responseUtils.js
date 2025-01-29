@@ -58,9 +58,18 @@ const cartApiResponse = (res, statusCode, success, message, cart) => {
     return res.status(statusCode).json(respone);
 }
 
+const wishlistApiResponse = (res, statusCode, success, message) => {
+    const response = {
+        success : success,
+        message : message
+    }
+    return res.status(statusCode).json(response);
+}
+
 module.exports = {
     userApiResponse,
     productApiResponse,
     orderApiResponse,
-    cartApiResponse
+    cartApiResponse,
+    wishlistApiResponse
 }

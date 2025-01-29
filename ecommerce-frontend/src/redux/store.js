@@ -1,19 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import LoginSignUpSlice from "./slice/LoginSignUpSlice";
-import userAuthReducer from "./slice/AuthSlice";
-import productReducer from './slice/ProductSlice';
-import cartReducer from './slice/CartSlice';
-import adminProductReducer from './slice/Dashboard/ProductSlice';
 import adminProductDeleteReducer from './slice/Dashboard/DeleteProduct'
+import adminProductReducer from './slice/Dashboard/ProductSlice';
+import cartReducer from './slice/CartSlice';
+import LoginSignUpSlice from "./slice/LoginSignUpSlice";
 import productDetailReducer from './slice/ProductDetailSlice'
+import productReducer from './slice/ProductSlice';
+import userAuthReducer from "./slice/AuthSlice";
+import wishlistReducer from "./slice/WishlistSlice"
 export const store = configureStore({
   reducer: {
-    loginSignUp: LoginSignUpSlice,
-    userAuth: userAuthReducer,
-    products : productReducer,
-    cart : cartReducer,
     adminProduct : adminProductReducer,
+    cart : cartReducer,
     deleteProduct : adminProductDeleteReducer,
-    productDetail : productDetailReducer
+    loginSignUp: LoginSignUpSlice,
+    productDetail : productDetailReducer,
+    products : productReducer,
+    userAuth: userAuthReducer,
+    wishlist: wishlistReducer
   },
 });

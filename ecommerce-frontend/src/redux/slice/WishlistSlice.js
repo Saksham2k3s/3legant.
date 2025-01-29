@@ -53,17 +53,11 @@ const wishlistSlice = createSlice({
   },
   reducers: {
     toggleWishlist(state, action) {
-      const product = action.payload;
-      const index = state.myProducts?.findIndex(
-        (item) => item._id === product._id
-      );
-
-      if (index !== -1) {
-        state.myProducts.splice(index, 1);
-      } else {
-        state.myProducts.push({ _id: product._id });
-      }
-    },
+  const product = action.payload;
+  state.myProducts = state.myProducts?.some((item) => item._id === product._id)
+    ? state.myProducts.filter((item) => item._id !== product._id) // Remove if exists
+    : [...state.myProducts, { _id: product._id }]; // Add if not exists
+}
     setSuccessMessage: (state) => {
       state.successMessage = "";
     },

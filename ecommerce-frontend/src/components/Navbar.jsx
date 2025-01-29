@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/Logo.png";
+import { getUserCart } from "../redux/slice/CartSlice";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { Link, useNavigate } from "react-router-dom";
 import { LuUserCircle2 } from "react-icons/lu";
-import { RxCross1 } from "react-icons/rx";
 import { RiSearchLine, RiBarChartHorizontalLine } from "react-icons/ri";
+import { RxCross1 } from "react-icons/rx";
+import { SearchBox } from "./Search";
+import { setLogout, setUser } from "../redux/slice/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setLogout, setUser } from "../redux/slice/AuthSlice";
-import toast from "react-hot-toast";
 import Cart from "./Cart";
-import { getUserCart } from "../redux/slice/CartSlice";
-import { SearchBox } from "./Search";
+import logo from "../assets/Logo.png";
+import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const REACT_APP_USER_API_URL = process.env.REACT_APP_USER_API_URL;
@@ -41,22 +41,19 @@ function Navbar() {
   };
 
   const searchBoxToggler = () => {
-      setSearchBoxOpen(!searchBoxOpen);
-      if(searchBoxOpen){
-       
-        document.body.style.overflowY = 'scroll'
-        document.body.style.overflowX = 'hidden';
-      }else{
-        document.body.style.overflowY = 'hidden';
-        document.body.style.overflowX = 'hidden';
-      }
-  }
+    setSearchBoxOpen(!searchBoxOpen);
+    if (searchBoxOpen) {
+      document.body.style.overflowY = "scroll";
+      document.body.style.overflowX = "hidden";
+    } else {
+      document.body.style.overflowY = "hidden";
+      document.body.style.overflowX = "hidden";
+    }
+  };
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
-        `${REACT_APP_USER_API_URL}/logout`
-      );
+      const response = await axios.get(`${REACT_APP_USER_API_URL}/logout`);
       if (response.data.success) {
         toast.success("Logged Out!");
         dispatch(setLogout());
@@ -117,7 +114,10 @@ function Navbar() {
         {user !== null ? (
           <div className="flex flex-row gap-4 justify-between align-middle items-center text-gray-500 text-4xl font-semibold">
             <div className="cursor-pointer">
-              <RiSearchLine className="text-sm md:text-lg lg:text-xl" onClick={searchBoxToggler} />
+              <RiSearchLine
+                className="text-sm md:text-lg lg:text-xl"
+                onClick={searchBoxToggler}
+              />
             </div>
             <div className="cursor-pointer w-full relative">
               <HiOutlineShoppingBag
@@ -196,6 +196,7 @@ function Navbar() {
           </Link>
           <Link onClick={handleLogout}>Logout</Link>
           <Link>Cart</Link>
+          <Link to='/wishlist' >My Wishlist</Link>
           {user && user.role === "admin" && (
             <Link to="/dashboard" onClick={toggleUserMenu}>
               Dashboard
@@ -225,12 +226,9 @@ function Navbar() {
         </div>
       </div>
 
-
-     {/* Search Box */}
+      {/* Search Box */}
       <div>
-        {
-          searchBoxOpen && <SearchBox searchBoxToggler = {searchBoxToggler} />  
-        }
+        {searchBoxOpen && <SearchBox searchBoxToggler={searchBoxToggler} />}
       </div>
     </>
   );

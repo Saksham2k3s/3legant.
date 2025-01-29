@@ -19,7 +19,6 @@ export const fetchProducts = createAsyncThunk(
   "productSlice/fetchProducts",
   async ({page = 1, query = '', category = ''}, { rejectWithValue }) => {
     try {
-
       // Build the query parameters string
       const queryParams = buildQueryParams({ page, query, category });
 

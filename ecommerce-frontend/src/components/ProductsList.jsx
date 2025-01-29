@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 function ProductsList() {
   const { products } = useSelector((state) => state.products);
-
   return (
     <>
       <div className=" hidden lg:block ">

@@ -11,7 +11,6 @@ const jwt = require('jsonwebtoken')
     }
     
     const decodedData = jwt.verify(token, process.env.JWT_SECERET);
-
     req.user = await userModel.findById(decodedData.id);
 
     next()

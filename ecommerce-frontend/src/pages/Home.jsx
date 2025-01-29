@@ -2,20 +2,24 @@ import { carouselImages } from "../utils/constants";
 import { FaArrowRightLong, FaEnvelope } from "react-icons/fa6";
 import { fetchProducts } from "../redux/slice/ProductSlice";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { valueCardData } from "../utils/constants";
 import ImageCarousel from "../components/ImageCarousel";
 import ProductsList from "../components/ProductsList";
 import React, { useEffect } from "react";
 import SaleBanner from "../assets/banner-image.png";
 import ValueCard from "../components/ValueCard";
+import { getMyProducts } from "../redux/slice/WishlistSlice";
 
 function Home() {
   const dispatch = useDispatch();
-
+  const { user } = useSelector(state => state.userAuth);
   useEffect(() => {
     dispatch(fetchProducts({ page: 1, query: "", category: "" }));
-  }, [dispatch]);
+    if(user){
+      dispatch(getMyProducts());
+    }
+  }, [user, dispatch]);
   return (
     <>
       <div className=" px-5 md:px-40 flex flex-col gap-10 lg:gap-20  ">

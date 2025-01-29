@@ -19,8 +19,8 @@ dotenv.config({ path: './.env' });
 
 // Configure CORS
 app.use(cors({
-    origin: "http://localhost:3000",
-    methods: 'GET,POST,PUT,DELETE', 
+    origin: process.env.CLIENT_URL,
+    methods: 'GET,POST,PUT,DELETE, PATCH', 
     credentials: true, 
   }));
 

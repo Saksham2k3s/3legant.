@@ -5,13 +5,12 @@ const generateToken = require("../utils/generateToken");
 const { userApiResponse } = require("../utils/responseUtils");
 const errorHandler = require("../utils/errorHandler");
 const productModel = require("../models/productModel");
-const cloudinary = require('cloudinary')
+const cloudinary = require("cloudinary");
 
 // Registering new user
 exports.userRegister = catchAsyncError(async (req, res, next) => {
   const { name, username, email, password } = req.body;
 
-   
   try {
     if (!name || !username || !email || !password) {
       return userApiResponse(res, 401, false, "All fields are equierd!");
@@ -20,13 +19,23 @@ exports.userRegister = catchAsyncError(async (req, res, next) => {
     const userAlreadyExitsByEmail = await UserModel.findOne({ email });
 
     if (userAlreadyExitsByEmail) {
-      return userApiResponse(res, 409, false, "User alredy exits with this email");
+      return userApiResponse(
+        res,
+        409,
+        false,
+        "User alredy exits with this email"
+      );
     }
 
     const userAlreadyExitsByUsername = await UserModel.findOne({ username });
 
     if (userAlreadyExitsByUsername) {
-      return userApiResponse(res, 409, false, "User alredy exits with this username");
+      return userApiResponse(
+        res,
+        409,
+        false,
+        "User alredy exits with this username"
+      );
     }
 
     const hashPass = await bycrpt.hash(password, 10);
@@ -59,7 +68,7 @@ exports.userLogin = catchAsyncError(async (req, res, next) => {
     // const user = await UserModel.findOne({ email });
 
     const user = await UserModel.findOne({
-      $or: [{ email: loginIdentifier }, { username: loginIdentifier }]
+      $or: [{ email: loginIdentifier }, { username: loginIdentifier }],
     });
 
     const comparePassword = await bycrpt.compare(password, user.password);
@@ -78,20 +87,27 @@ exports.userLogin = catchAsyncError(async (req, res, next) => {
 
 //User Logout
 exports.userLogout = catchAsyncError(async (req, res, next) => {
-  res.cookie("token", null, {
-    expires : new Date(Date.now()),
-    httpOnly: true
-  })
+  // res.cookie("token", null, {
+  //   expires : new Date(0),
+  //   httpOnly: true,
+  //   path: "/",
+  //   domain: process.env.CLIENT_URL
+  // })
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.IS_SAME_SITE,
+    path: "/",
+  });
   return userApiResponse(res, 200, true, "user logged out successfully!");
 });
 
 // Check for user token present in cookie or not
 
 exports.getUserProfile = catchAsyncError(async (req, res) => {
-    try {
-      return userApiResponse(res, 200, true, "User is Authenticated", req.user);
-    } catch (error) {
-      return userApiResponse(res, 401, false, "Error while getting user data");
-    }
-})
-
+  try {
+    return userApiResponse(res, 200, true, "User is Authenticated", req.user);
+  } catch (error) {
+    return userApiResponse(res, 401, false, "Error while getting user data");
+  }
+});

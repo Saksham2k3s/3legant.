@@ -25,8 +25,8 @@ const generateToken = (user, statusCode, res) => {
       Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: true, // set it to process.env.NODE_ENV === "production"
-    sameSite: 'None', //Set it to Lax if on localhost
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.IS_SAME_SITE,
   };
 
 

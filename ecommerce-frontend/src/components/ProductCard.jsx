@@ -74,7 +74,7 @@ function ProductCard({ product }) {
             <img
               className="w-full h-full absolute m-0 top-0 right-0 bottom-0 left-0 max-w-full overflow-hidden max-h-full object-cover"
               alt=""
-              src={images[0]?.url}
+              src={images ? images[0]?.url : ''}
             />
             <div className="self-stretch flex flex-row items-start justify-between gap-5">
               <div className=" items-start justify-start z-10 ">

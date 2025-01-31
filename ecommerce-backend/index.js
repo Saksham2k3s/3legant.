@@ -20,7 +20,7 @@ dotenv.config({ path: './.env' });
 // Configure CORS
 app.use(cors({
     origin: "https://3legant-frontend.vercel.app",
-    methods: 'GET,POST,PUT,DELETE, PATCH', 
+    methods: 'GET,POST,PUT,DELETE,PATCH', 
     credentials: true, 
   }));
 

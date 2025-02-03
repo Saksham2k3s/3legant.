@@ -84,7 +84,7 @@ function ProductCard({ product }) {
             <div className="self-stretch flex flex-row items-start justify-between gap-5">
               <div className=" items-start justify-start z-10 ">
                 <div className="rounded bg-mediumseagreen items-start justify-start py-1 px-3.5 text-white">
-                  {getDiscountPercentage()}%
+                  -{getDiscountPercentage()}%
                 </div>
               </div>
               <div

@@ -65,6 +65,11 @@ function ProductCard({ product }) {
     return myProducts.some((item) => item._id === _id);
   };
 
+  function getDiscountPercentage() {
+    if (actualPrice <= 0) return 0; // Prevent division by zero
+    return Math.round(((actualPrice - discountPrice) / actualPrice) * 100);
+}
+
   const stars = [1, 2, 3, 4, 5];
   return (
     <>
@@ -79,7 +84,7 @@ function ProductCard({ product }) {
             <div className="self-stretch flex flex-row items-start justify-between gap-5">
               <div className=" items-start justify-start z-10 ">
                 <div className="rounded bg-mediumseagreen items-start justify-start py-1 px-3.5 text-white">
-                  -50%
+                  {getDiscountPercentage()}%
                 </div>
               </div>
               <div

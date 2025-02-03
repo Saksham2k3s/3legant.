@@ -40,3 +40,40 @@ label {
   @apply bg-transparent text-black w-full lg:w-fit text-[20px] focus:outline-none placeholder:text-gray-400 placeholder:font-medium mt-2 lg:mt-3 px-5 py-2;
 }
 
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Blurred effect */
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+}
+
+.loader{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h3{
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+

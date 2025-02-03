@@ -49,7 +49,9 @@ function App() {
   return (
     <>
       {loading ? (
-        <div>Loading....</div>
+        <div className="loader" >
+          <h3>🛒 Hold on, it's loading...</h3>
+        </div>
       ) : (
         <div className="min-h-screen min-w-screen overflow-x-hidden lg:overflow-x-auto ">
           <Toaster

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getCacheKey } from "../../helpers/product";
 
 const REACT_APP_PRODUCT_API_URL = process.env.REACT_APP_PRODUCT_API_URL;
 
@@ -17,7 +18,16 @@ const buildQueryParams = (params) => {
 
 export const fetchProducts = createAsyncThunk(
   "productSlice/fetchProducts",
-  async ({page = 1, query = '', category = ''}, { rejectWithValue }) => {
+  async ({page = 1, query = '', category = ''}, { getState, rejectWithValue }) => {
+    const state = getState().products;
+    const cacheKey = getCacheKey(page, query, category);
+
+    // Check if data is already in cache
+    if (cacheKey in state.cache) {
+      return state.cache[cacheKey];
+    }
+
+    console.log("huuu");
     try {
       // Build the query parameters string
       const queryParams = buildQueryParams({ page, query, category });
@@ -30,7 +40,7 @@ export const fetchProducts = createAsyncThunk(
           },
         }
       );
-      return result.data;
+      return {...result.data, cacheKey};
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data.message);
@@ -52,7 +62,8 @@ const productSlice = createSlice({
     errorMessage: '',
     totalProducts : 0,
     resultPerPage : 0,
-    page : 1
+    page : 1,
+    cache: {}
   },
   reducers: {
     incrementPage: (state) => {
@@ -80,6 +91,10 @@ const productSlice = createSlice({
       state.totalProducts = action.payload.totalProducts;
       state.resultPerPage = action.payload.resultPerPage;
       state.products = action.payload.products || [];
+
+      // Store response in cache
+      const cacheKey = action.payload.cacheKey;
+      state.cache[cacheKey] = action.payload;
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.isError = true;

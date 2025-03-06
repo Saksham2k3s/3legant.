@@ -1,10 +1,11 @@
-import React from "react";
-import headerImg from "../assets/shop-page-header.png";
-import { useSelector, useDispatch } from "react-redux";
-import ProductCard from "../components/ProductCard";
-import Pagination from "../components/Pagination";
 import { fetchProducts } from "../redux/slice/ProductSlice";
+import { priceFilterValues } from "../utils/constants";
 import { SearchBar } from "../components/Search";
+import { useSelector, useDispatch } from "react-redux";
+import headerImg from "../assets/shop-page-header.png";
+import Pagination from "../components/Pagination";
+import ProductCard from "../components/ProductCard";
+import React from "react";
 
 function Shop() {
   const dispatch = useDispatch();
@@ -13,6 +14,19 @@ function Shop() {
   const categoryFilterHandler = (e) => {
     e.preventDefault();
     dispatch(fetchProducts({ category: e.target.value }));
+  };
+
+  const priceFilterHandler = (e) => {
+    e.preventDefault();
+
+    const selectedRange = e.target.value;
+
+    if (selectedRange) {
+      const [minPrice, maxPrice] = selectedRange
+        .replace(/\$/g, "")
+        .split(" - ");
+      dispatch(fetchProducts({ minPrice: minPrice, maxPrice: maxPrice }));
+    }
   };
   return (
     <>
@@ -66,10 +80,18 @@ function Shop() {
                   name="price"
                   id="price"
                   className="w-full bg-transparent text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md transition ease-in-out duration-200"
+                  onChange={priceFilterHandler}
                 >
-                  <option value="">All Price</option>
-                  <option value="">Footwear</option>
-                  <option value="">Cloths</option>
+                  <option selected disabled>
+                    Select Price
+                  </option>
+                  {priceFilterValues.map((value, idx) => {
+                    return (
+                      <option key={idx} value={value}>
+                        {value}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
@@ -86,13 +108,13 @@ function Shop() {
 
       {/* Products Grid */}
 
-<div className="flex justify-center w-full px-5 mt-5 lg:mt-10 md:px-20 lg:px-40">
-  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-    {products.map((product) => (
-      <ProductCard key={product.id} product={product} />
-    ))}
-  </div>
-</div>
+      <div className="flex justify-center w-full px-5 mt-5 lg:mt-10 md:px-20 lg:px-40">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
 
       {/* Pagination */}
       <div>

@@ -1,23 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { buildQueryParams, getCacheKey } from "../../helpers/product";
+import { getCacheKey } from "../../helpers/product";
 
 const REACT_APP_PRODUCT_API_URL = process.env.REACT_APP_PRODUCT_API_URL;
 
+// Helper function to construct query parameters string
+const buildQueryParams = (params) => {
+  const queryParams = new URLSearchParams();
+
+  // Only append parameters if they have values
+  if (params.page) queryParams.append('page', params.page);
+  if (params.query) queryParams.append('keyword', params.query);
+  if (params.category) queryParams.append('category', params.category);
+
+  return queryParams.toString();
+};
+
 export const fetchProducts = createAsyncThunk(
   "productSlice/fetchProducts",
-  async ({page = 1, query = '', category = '', minPrice = '', maxPrice = ''}, { getState, rejectWithValue }) => {
+  async ({page = 1, query = '', category = ''}, { getState, rejectWithValue }) => {
     const state = getState().products;
-    const cacheKey = getCacheKey(page, query, category, minPrice, maxPrice);
+    const cacheKey = getCacheKey(page, query, category);
 
     // Check if data is already in cache
     if (cacheKey in state.cache) {
       return state.cache[cacheKey];
     }
 
+    console.log("huuu");
     try {
       // Build the query parameters string
-      const queryParams = buildQueryParams({ page, query, category, minPrice, maxPrice });
+      const queryParams = buildQueryParams({ page, query, category });
 
       const result = await axios.get(
         `${REACT_APP_PRODUCT_API_URL}/all?${queryParams}`,

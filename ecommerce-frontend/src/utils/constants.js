@@ -1,46 +1,35 @@
-import { CiMoneyBill, CiLock, CiPhone } from "react-icons/ci";
 import { LiaShippingFastSolid } from "react-icons/lia";
+import { CiMoneyBill, CiLock, CiPhone } from "react-icons/ci";
 import carouselImage from "../assets/Paste image.png";
-import carouselImage2 from "../assets/hero-banner-2.jpg";
-
-// valueCardData to show value card at home page
+import carouselImage2 from "../assets/hero-banner-2.jpg"
 export const valueCardData = [
-  {
-    Icon: <LiaShippingFastSolid size={48} />,
-    title: "Free Shipping",
-    subtitle: "Order above $200",
-  },
-  {
-    Icon: <CiMoneyBill size={48} />,
-    title: "Money-back",
-    subtitle: "30 days guarantee",
-  },
-  {
-    Icon: <CiLock size={48} />,
-    title: "Secure Payments",
-    subtitle: "Secure by Stripe",
-  },
-  {
-    Icon: <CiPhone size={48} />,
-    title: "24/7 Support",
-    subtitle: "Phone and Email Support",
-  },
-];
-
-// carouselImages for homepage
-export const carouselImages = [
-  {
-    url: carouselImage,
-  },
-  {
-    url: carouselImage2,
-  },
-];
-
-export const priceFilterValues = [
-    '$10 - $100',
-    '$100 - $200',
-    '$200 - $500',
-    '$500 - $1000',
-    '$1000 - $1500'
+    {
+        Icon : <LiaShippingFastSolid size={48} />,
+        title : 'Free Shipping',
+        subtitle : 'Order above $200'
+    },
+    {
+        Icon : <CiMoneyBill size={48} />,
+        title : 'Money-back',
+        subtitle : '30 days guarantee'
+    },
+    {
+        Icon : <CiLock size={48} />,
+        title : 'Secure Payments',
+        subtitle : 'Secure by Stripe'
+    },
+    {
+        Icon : <CiPhone size={48} />,
+        title : '24/7 Support',
+        subtitle : 'Phone and Email Support'
+    },
 ]
+
+export const carouselImages = [
+    {
+       url : carouselImage
+    },
+    {
+        url : carouselImage2
+    }
+];
